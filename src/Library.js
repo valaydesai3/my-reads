@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BookShelf from './BookShelf';
 
 class Library extends React.Component {
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+  };
+
   render() {
     const { books } = this.props;
     const shelfs = [
@@ -20,12 +25,14 @@ class Library extends React.Component {
 
     return (
       <div className="library">
-        {shelfs.map((shelf) => (
-          <BookShelf
-            title={shelf.title}
-            booksByShelf={booksByShelf[shelf.id]}
-          />
-        ))}
+        {!!books.length &&
+          shelfs.map((shelf) => (
+            <BookShelf
+              key={shelf.id}
+              title={shelf.title}
+              booksByShelf={booksByShelf[shelf.id]}
+            />
+          ))}
       </div>
     );
   }

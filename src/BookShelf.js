@@ -1,7 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Book from './Book';
 
 class BookShelf extends React.Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    booksByShelf: PropTypes.arrayOf(PropTypes.object).isRequired,
+  };
+
   render() {
     const { title, booksByShelf } = this.props;
     return (
@@ -10,7 +16,7 @@ class BookShelf extends React.Component {
         <div className="books">
           {booksByShelf !== undefined &&
             booksByShelf.length > 0 &&
-            booksByShelf.map((book) => <Book bookData={book} />)}
+            booksByShelf.map((book) => <Book key={book.id} bookData={book} />)}
         </div>
       </div>
     );
