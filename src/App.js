@@ -7,6 +7,24 @@ class App extends React.Component {
   state = {
     books: [],
   };
+
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      const books = this.state.books.map((currBook) => {
+        if (currBook.id === book.id) currBook.shelf = shelf;
+        return currBook;
+      });
+      this.setState(() => ({
+        books,
+      }));
+    });
+  };
+
+  handleChangeShelf = (e, book) => {
+    const shelf = e.target.value;
+    this.updateShelf(book, shelf);
+  };
+
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState(() => ({
@@ -20,7 +38,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">MyReads</header>
         <div className="container">
-          <Library books={books} />
+          <Library books={books} handleChangeShelf={this.handleChangeShelf} />
         </div>
       </div>
     );

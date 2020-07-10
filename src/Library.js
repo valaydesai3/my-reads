@@ -5,10 +5,11 @@ import BookShelf from './BookShelf';
 class Library extends React.Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
+    handleChangeShelf: PropTypes.func.isRequired,
   };
 
   render() {
-    const { books } = this.props;
+    const { books, handleChangeShelf } = this.props;
     const shelfs = [
       { id: 'currentlyReading', title: 'Currently Reading' },
       { id: 'wantToRead', title: 'Want to Read' },
@@ -31,6 +32,7 @@ class Library extends React.Component {
               key={shelf.id}
               title={shelf.title}
               booksByShelf={booksByShelf[shelf.id]}
+              updateShelf={handleChangeShelf}
             />
           ))}
       </div>
