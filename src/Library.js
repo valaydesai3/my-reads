@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf';
 
 class Library extends React.Component {
@@ -35,6 +36,9 @@ class Library extends React.Component {
               updateShelf={handleChangeShelf}
             />
           ))}
+        <div className="open-search">
+          <Link to="/search">Add a book</Link>
+        </div>
       </div>
     );
   }
