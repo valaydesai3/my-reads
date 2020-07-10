@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NoCover from './No-Cover.png'; // if thumbnai is not available
 
 class Book extends React.Component {
   static propTypes = {
@@ -18,7 +19,9 @@ class Book extends React.Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${bookData.imageLinks.thumbnail})`,
+              backgroundImage: `url(${
+                bookData.imageLinks ? bookData.imageLinks.thumbnail : NoCover
+              })`,
             }}
           ></div>
           <div className="book-shelf-changer">

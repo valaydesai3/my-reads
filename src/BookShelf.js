@@ -5,7 +5,7 @@ import Book from './Book';
 class BookShelf extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    booksByShelf: PropTypes.arrayOf(PropTypes.object).isRequired,
+    booksByShelf: PropTypes.arrayOf(PropTypes.object),
     updateShelf: PropTypes.func.isRequired,
   };
 
@@ -14,13 +14,15 @@ class BookShelf extends React.Component {
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{title}</h2>
-        <div className="books">
+        <ol className="books-grid">
           {booksByShelf !== undefined &&
             booksByShelf.length > 0 &&
             booksByShelf.map((book) => (
-              <Book key={book.id} bookData={book} onShelfChange={updateShelf} />
+              <li key={book.id}>
+                <Book bookData={book} onShelfChange={updateShelf} />
+              </li>
             ))}
-        </div>
+        </ol>
       </div>
     );
   }

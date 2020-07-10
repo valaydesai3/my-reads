@@ -37,8 +37,8 @@ class App extends React.Component {
   render() {
     const { books } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">MyReads</header>
+      <div className="app">
+        <header className="header">MyReads</header>
         <div className="container">
           <Route
             exact
@@ -50,7 +50,10 @@ class App extends React.Component {
               />
             )}
           />
-          <Route path="/search" render={() => <Search />} />
+          <Route
+            path="/search"
+            render={() => <Search updateShelf={this.handleChangeShelf} />}
+          />
         </div>
       </div>
     );
