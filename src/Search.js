@@ -18,6 +18,8 @@ class Search extends React.Component {
 
   componentDidUpdate = () => {
     const { currentQuery, previousQuery } = this.state;
+    const { myBooks } = this.props;
+
     if (currentQuery !== previousQuery) {
       if (currentQuery !== '') {
         BooksAPI.search(currentQuery).then((books) => {
@@ -28,8 +30,14 @@ class Search extends React.Component {
               booksNotFound: true,
             }));
           } else {
+            // if search result has book/books in my books library to show current shelf of a book
+            const searchBooks = books.map((book) => {
+              const myBook = myBooks.filter((myBook) => myBook.id === book.id);
+              return myBook.length > 0 ? myBook[0] : book;
+            });
+
             this.setState(() => ({
-              books,
+              books: searchBooks,
               previousQuery: currentQuery,
               booksNotFound: false,
             }));

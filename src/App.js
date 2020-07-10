@@ -52,7 +52,9 @@ class App extends React.Component {
           />
           <Route
             path="/search"
-            render={() => <Search updateShelf={this.handleChangeShelf} />}
+            render={() => (
+              <Search myBooks={books} updateShelf={this.handleChangeShelf} />
+            )}
           />
         </div>
       </div>
