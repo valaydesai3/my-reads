@@ -26,10 +26,10 @@ class Book extends React.Component {
           ></div>
           <div className="book-shelf-changer">
             <select
-              defaultValue={bookData.shelf}
               onChange={(e) => onShelfChange(e, bookData)}
+              value={bookData.shelf ? bookData.shelf : ''}
             >
-              <option value="move" disabled>
+              <option value="" disabled>
                 Move to...
               </option>
               <option value="currentlyReading">Currently Reading</option>

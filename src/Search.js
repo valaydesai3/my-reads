@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes, { object } from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
 
 class Search extends React.Component {
+  static propTypes = {
+    myBooks: PropTypes.arrayOf(object).isRequired,
+  };
+
   state = {
     currentQuery: '',
     previousQuery: '',
@@ -30,7 +35,7 @@ class Search extends React.Component {
               booksNotFound: true,
             }));
           } else {
-            // if search result has book/books in my books library to show current shelf of a book
+            // if search result has book/books in my library to show current shelf of a book
             const searchBooks = books.map((book) => {
               const myBook = myBooks.filter((myBook) => myBook.id === book.id);
               return myBook.length > 0 ? myBook[0] : book;

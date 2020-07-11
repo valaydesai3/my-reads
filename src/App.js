@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import './App.css';
 import * as BooksAPI from './BooksAPI';
 import Library from './Library';
 import Search from './Search';
+import './App.css';
 
 class App extends React.Component {
   state = {
@@ -12,13 +12,25 @@ class App extends React.Component {
 
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
-      const books = this.state.books.map((currBook) => {
-        if (currBook.id === book.id) currBook.shelf = shelf;
-        return currBook;
-      });
-      this.setState(() => ({
-        books,
-      }));
+      // updating book shelf from search results
+      const myBooks = this.state.books.filter(
+        (myBook) => myBook.id === book.id
+      );
+      if (myBooks.length === 0) {
+        book.shelf = shelf; // if there's no book in my library and we update shelf from search results
+        this.setState((currentState) => ({
+          books: currentState.books.concat(book),
+        }));
+      } else {
+        // books already in my library
+        const books = this.state.books.map((currBook) => {
+          if (currBook.id === book.id) currBook.shelf = shelf;
+          return currBook;
+        });
+        this.setState(() => ({
+          books,
+        }));
+      }
     });
   };
 

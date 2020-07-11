@@ -13,7 +13,9 @@ class BookShelf extends React.Component {
     const { title, booksByShelf, updateShelf } = this.props;
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{title}</h2>
+        {booksByShelf !== undefined && (
+          <h2 className="bookshelf-title">{title}</h2>
+        )}
         <ol className="books-grid">
           {booksByShelf !== undefined &&
             booksByShelf.length > 0 &&

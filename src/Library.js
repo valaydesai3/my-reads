@@ -21,21 +21,34 @@ class Library extends React.Component {
     books.forEach((book) => {
       const { shelf } = book;
       if (!shelf) return;
-      if (!booksByShelf[shelf]) booksByShelf[shelf] = [book];
-      else booksByShelf[shelf].push(book);
+      if (shelf !== 'none') {
+        if (!booksByShelf[shelf]) {
+          booksByShelf[shelf] = [book];
+        } else booksByShelf[shelf].push(book);
+      }
     });
 
     return (
       <div className="library">
+        {Object.keys(booksByShelf).length === 0 && (
+          <div className="empty-bookshelf">
+            <span>Your Bookshelf Is Curently Empty</span>
+          </div>
+        )}
         {!!books.length &&
-          shelfs.map((shelf) => (
-            <BookShelf
-              key={shelf.id}
-              title={shelf.title}
-              booksByShelf={booksByShelf[shelf.id]}
-              updateShelf={handleChangeShelf}
-            />
-          ))}
+          shelfs.map((shelf) => {
+            const { id, title } = shelf;
+            return (
+              booksByShelf[id] && (
+                <BookShelf
+                  key={id}
+                  title={title}
+                  booksByShelf={booksByShelf[id]}
+                  updateShelf={handleChangeShelf}
+                />
+              )
+            );
+          })}
         <div className="open-search">
           <Link to="/search">Add a book</Link>
         </div>
