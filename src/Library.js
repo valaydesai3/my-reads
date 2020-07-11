@@ -32,7 +32,7 @@ class Library extends React.Component {
       <div className="library">
         {Object.keys(booksByShelf).length === 0 && (
           <div className="empty-bookshelf">
-            <span>Your Bookshelf Is Curently Empty</span>
+            <span>Your Bookshelf Is Currently Empty</span>
           </div>
         )}
         {!!books.length &&
