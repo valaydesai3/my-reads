@@ -17,7 +17,7 @@ class Search extends React.Component {
 
   updateQuery = (query) => {
     this.setState(() => ({
-      currentQuery: query.trim(),
+      currentQuery: query,
     }));
   };
 

@@ -27,7 +27,7 @@ class Book extends React.Component {
           <div className="book-shelf-changer">
             <select
               onChange={(e) => onShelfChange(e, bookData)}
-              value={bookData.shelf ? bookData.shelf : ''}
+              value={bookData.shelf ? bookData.shelf : 'none'}
             >
               <option value="" disabled>
                 Move to...
